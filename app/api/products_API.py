@@ -37,7 +37,7 @@ def read_expired_products(db: Session = Depends(get_db)):
     return db.query(models.Product).filter(models.Product.expiration_date < today).all()
 
 # Обновить продукт
-@router.put("/products/{product_id}", response_model=schemas.Product)
+@router.put("/products/{product_id}", response_model=Product)
 def update_product(product_id: int, product: ProductUpdate, db: Session = Depends(get_db)):
     db_product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if not db_product:
